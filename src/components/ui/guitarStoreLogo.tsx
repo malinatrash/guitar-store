@@ -12,7 +12,7 @@ const GuitarStoreLogo: FC = () => {
 				className={`bg-slate-50 rounded-full transition-all ${
 					isHover && 'opacity-50'
 				}`}
-				src='/public/GuitarStoreLogo.png'
+				src='/src/assets/logo.png'
 				alt='logo'
 			/>
 			<div className='flex flex-col justify-center ml-5'>
