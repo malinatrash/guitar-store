@@ -1,12 +1,17 @@
 import { FC, useState } from 'react'
 
-const GuitarStoreLogo: FC = () => {
+interface Props {
+	onClick?: () => void
+}
+
+const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 	const [isHover, setisHover] = useState(false)
 	return (
 		<div
 			className='flex h-28 hover:text-5xl'
 			onMouseEnter={() => setisHover(true)}
 			onMouseLeave={() => setisHover(false)}
+			onClick={onClick}
 		>
 			<img
 				className={`bg-slate-50 rounded-full transition-all ${
