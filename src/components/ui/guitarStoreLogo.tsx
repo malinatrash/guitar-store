@@ -14,7 +14,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 			onClick={onClick}
 		>
 			<img
-				className={`bg-slate-50 rounded-full transition-all ${
+				className={`bg-slate-50 rounded-full transition-all pr-1 ${
 					isHover && 'opacity-50'
 				}`}
 				src='/assets/logo.png'
