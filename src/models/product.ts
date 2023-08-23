@@ -18,7 +18,7 @@ export const mockProductList: Product[] = [
 	{
 		id: 2,
 		type: 'Электрогитары',
-		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch Blonde',
+		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch',
 		price: '37 100₽',
 		picture:
 			'https://www.muztorg.ru/files/egx/po4/bqz/808/k0c/48w/so0/8w4/w/egxpo4bqz808k0c48wso08w4w.jpeg',
@@ -42,7 +42,7 @@ export const mockProductList: Product[] = [
 	{
 		id: 5,
 		type: 'Электрогитары',
-		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch Blonde',
+		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch',
 		price: '37 100₽',
 		picture:
 			'https://www.muztorg.ru/files/egx/po4/bqz/808/k0c/48w/so0/8w4/w/egxpo4bqz808k0c48wso08w4w.jpeg',
@@ -66,7 +66,7 @@ export const mockProductList: Product[] = [
 	{
 		id: 8,
 		type: 'Электрогитары',
-		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch Blonde',
+		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch',
 		price: '37 100₽',
 		picture:
 			'https://www.muztorg.ru/files/egx/po4/bqz/808/k0c/48w/so0/8w4/w/egxpo4bqz808k0c48wso08w4w.jpeg',
@@ -90,7 +90,7 @@ export const mockProductList: Product[] = [
 	{
 		id: 2,
 		type: 'Электрогитары',
-		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch Blonde',
+		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch',
 		price: '37 100₽',
 		picture:
 			'https://www.muztorg.ru/files/egx/po4/bqz/808/k0c/48w/so0/8w4/w/egxpo4bqz808k0c48wso08w4w.jpeg',
@@ -114,7 +114,7 @@ export const mockProductList: Product[] = [
 	{
 		id: 5,
 		type: 'Электрогитары',
-		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch Blonde',
+		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch',
 		price: '37 100₽',
 		picture:
 			'https://www.muztorg.ru/files/egx/po4/bqz/808/k0c/48w/so0/8w4/w/egxpo4bqz808k0c48wso08w4w.jpeg',
@@ -138,7 +138,7 @@ export const mockProductList: Product[] = [
 	{
 		id: 8,
 		type: 'Электрогитары',
-		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch Blonde',
+		title: 'FENDER SQUIER Affinity 2021 Telecaster MN Butterscotch',
 		price: '37 100₽',
 		picture:
 			'https://www.muztorg.ru/files/egx/po4/bqz/808/k0c/48w/so0/8w4/w/egxpo4bqz808k0c48wso08w4w.jpeg',

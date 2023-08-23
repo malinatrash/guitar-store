@@ -8,7 +8,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 	const [isHover, setisHover] = useState(false)
 	return (
 		<div
-			className='flex h-28 hover:text-5xl'
+			className='flex h-28 hover:text-5xl mobile:h-12 mobile:relative mobile:top-8'
 			onMouseEnter={() => setisHover(true)}
 			onMouseLeave={() => setisHover(false)}
 			onClick={onClick}
@@ -22,7 +22,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 			/>
 			<div className='flex flex-col justify-center ml-5'>
 				<span
-					className={`transition-all text-slate-50 text-3xl ${
+					className={`transition-all text-slate-50 text-3xl mobile:text-[0] ${
 						isHover && 'text-5xl opacity-50'
 					}`}
 				>

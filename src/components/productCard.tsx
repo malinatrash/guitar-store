@@ -10,9 +10,9 @@ interface Props {
 
 const ProductCard: FC<Props> = ({ product, toast }) => {
 	return (
-		<div className='bg-white h-[30rem] p-2 w-64 flex flex-col border-[3px] border-black rounded-2xl shadow-sm justify-between'>
+		<div className='bg-white h-[30rem] mobile:h-[26rem] mobile:w-36 p-2 w-64 flex flex-col border-[3px] border-black rounded-2xl shadow-sm justify-between'>
 			<img
-				className='h-60 object-scale-down'
+				className='h-60 object-scale-down mobile:h-32'
 				src={product.picture}
 				alt={product.picture}
 			/>

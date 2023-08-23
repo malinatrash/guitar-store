@@ -11,29 +11,29 @@ const Header: FC = () => {
 			<GuitarStoreLogo onClick={() => navigate('/')} />
 			<div className='py-10'>
 				<Button
-					className='transition-all flex justify-around w-36 hover:w-52'
+					className='transition-all flex justify-around w-36 hover:w-52 mobile:w-14'
 					variant='secondary'
 					onClick={() => navigate('/favorites')}
 				>
-					<Heart /> Избранное
+					<Heart /> <span className='mobile:text-[0]'>Избранное</span>
 				</Button>
 			</div>
 			<div className='py-10'>
 				<Button
-					className='transition-all flex justify-around w-36 hover:w-52'
+					className='transition-all flex justify-around w-36 hover:w-52 mobile:w-14'
 					variant='secondary'
 					onClick={() => navigate('/cart')}
 				>
-					<ShoppingCart /> Корзина
+					<ShoppingCart /> <span className='mobile:text-[0]'>Корзина</span>
 				</Button>
 			</div>
 			<div className='py-10'>
 				<Button
-					className='transition-all flex justify-around w-36 hover:w-52'
+					className='transition-all flex justify-around w-36 hover:w-52 mobile:w-14'
 					variant='secondary'
 					onClick={() => navigate('/user')}
 				>
-					<User /> Профиль
+					<User /> <span className='mobile:text-[0]'>Профиль</span>
 				</Button>
 			</div>
 		</div>
