@@ -7,7 +7,7 @@ import GuitarStoreLogo from './ui/guitarStoreLogo'
 const Header: FC = () => {
 	const navigate = useNavigate()
 	return (
-		<div className='w-full h-full p-4 bg-black flex justify-around'>
+		<div className='w-full h-full p-4 bg-black flex justify-around mobile:gap-7'>
 			<GuitarStoreLogo onClick={() => navigate('/')} />
 			<div className='py-10'>
 				<Button
