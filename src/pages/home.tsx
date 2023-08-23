@@ -17,7 +17,7 @@ const Home: React.FC<Props> = ({ children }) => {
 	return (
 		<div className='bg-[#f8f8f8]'>
 			<Header />
-			<div className='flex justify-around gap-5 p-6 wrap flex-wrap'>
+			<div className='flex justify-around gap-5 p-6 mobile:p-2 mobile:gap-2 wrap flex-wrap'>
 				{mockProductList.map(product => (
 					<ProductCard key={product.id} product={product} toast={toast} />
 				))}

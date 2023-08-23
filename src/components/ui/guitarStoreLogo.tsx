@@ -8,7 +8,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 	const [isHover, setisHover] = useState(false)
 	return (
 		<div
-			className='flex h-28 hover:text-5xl mobile:h-12 mobile:relative mobile:top-8'
+			className='flex h-28 hover:text-5xl mobile:h-28 mobile:relative'
 			onMouseEnter={() => setisHover(true)}
 			onMouseLeave={() => setisHover(false)}
 			onClick={onClick}
