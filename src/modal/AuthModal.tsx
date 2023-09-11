@@ -41,7 +41,7 @@ const AuthDialog = () => {
 	}, [isShown])
 	return (
 		<Dialog open={show} onOpenChange={action}>
-			<DialogContent className='mobile:max-w-[80%] mobile:left-[45%] flex items-center justify-center flex-wrap'>
+			<DialogContent className='mobile:max-w-[85%] mobile:self-center flex items-center justify-center flex-wrap'>
 				<DialogHeader onClick={() => setShow(false)}></DialogHeader>
 				<Tabs defaultValue='account' className='w-[100%]'>
 					<TabsList className='grid w-full grid-cols-2 py-2 gap-4 bg-gray-500/10 p-2 rounded-xl mb-3'>
