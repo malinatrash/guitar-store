@@ -68,7 +68,7 @@
 
 @layer base {
 	* {
-		@apply border-border select-none;
+		@apply border-border select-none outline-none;
 	}
 	body {
 		@apply bg-background text-foreground;
