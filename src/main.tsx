@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import ErrorPage from './pages/error'
-import Home from './pages/home'
+import { Home } from './pages/home'
 import { store } from './store/store'
 
 const router = createBrowserRouter([

@@ -3,13 +3,10 @@ import Header from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { useProductList } from '@/hooks/useProductList'
-import '@/styles/index.css'
-import { ReactNode } from 'react'
+import AuthModal from '@/modal/AuthModal'
+import ModalProvider from '@/modal/ModalProvider'
 
-interface Props {
-	children?: ReactNode
-}
-const Home: React.FC<Props> = () => {
+export const Home = () => {
 	const productList = useProductList()
 
 	return (
@@ -19,8 +16,7 @@ const Home: React.FC<Props> = () => {
 				<ProductList productList={productList} />
 			</div>
 			<Toaster />
+			<ModalProvider childern={<AuthModal />} />
 		</ThemeProvider>
 	)
 }
-
-export default Home

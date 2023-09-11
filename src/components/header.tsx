@@ -1,15 +1,18 @@
+import { show } from '@/store/slices/authModalSlice'
 import { RootState } from '@/store/store'
 import { Heart, ShoppingCart, User } from 'lucide-react'
 import { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { Button } from './ui/button'
 import GuitarStoreLogo from './ui/guitarStoreLogo'
 import { ModeToggle } from './ui/modeToggle'
 
 const Header: FC = () => {
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const isAuth = useSelector((state: RootState) => state.auth.isAuth)
+	const isShown = useSelector((state: RootState) => state.authModal.isShown)
 	return (
 		<div className='h-36 p-4 bg-black flex justify-between px-[5%]'>
 			<GuitarStoreLogo onClick={() => navigate('/')} />
@@ -36,7 +39,7 @@ const Header: FC = () => {
 					<Button
 						className='transition-all flex justify-around w-36 hover:w-52 mobile:w-14'
 						variant='secondary'
-						onClick={() => navigate('/user')}
+						onClick={() => dispatch(show())}
 					>
 						<User />{' '}
 						<span className='mobile:text-[0]'>
