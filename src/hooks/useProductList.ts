@@ -8,8 +8,8 @@ export const useProductList = () => {
 	useEffect(() => {
 		async function fetchProductData() {
 			try {
-				const data = await fetchProductList()
-				setProducts(data.data)
+				const res = await fetchProductList()
+				setProducts(res.data)
 			} catch (error) {
 				console.error('Error fetching products:', error)
 			}

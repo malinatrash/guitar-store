@@ -12,7 +12,6 @@ const Header: FC = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const isAuth = useSelector((state: RootState) => state.auth.isAuth)
-	const isShown = useSelector((state: RootState) => state.authModal.isShown)
 	return (
 		<div className='h-36 p-4 bg-black flex justify-between px-[5%]'>
 			<GuitarStoreLogo onClick={() => navigate('/')} />
