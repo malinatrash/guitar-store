@@ -1,32 +1,25 @@
+import ProductList from '@/components/ProductList'
 import Header from '@/components/header'
-import ProductCard from '@/components/productCard'
+import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
-import { useToast } from '@/components/ui/use-toast'
-import { mockProductList } from '@/models/product'
+import { useProductList } from '@/hooks/useProductList'
 import '@/styles/index.css'
 import { ReactNode } from 'react'
 
 interface Props {
 	children?: ReactNode
 }
-const Home: React.FC<Props> = ({ children }) => {
-	const { toast } = useToast()
-
-	const isUserPath = window.location.pathname === '/user'
+const Home: React.FC<Props> = () => {
+	const productList = useProductList()
 
 	return (
-		<div className='bg-[#f8f8f8]'>
+		<ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
 			<Header />
-			<div className='flex justify-around gap-5 p-6 mobile:p-2 mobile:gap-2 wrap flex-wrap'>
-				{mockProductList.map(product => (
-					<ProductCard key={product.id} product={product} toast={toast} />
-				))}
+			<div className='flex gap-5 p-6 mobile:p-2 mobile:gap-2 mobile:flex-col wrap flex-wrap'>
+				<ProductList productList={productList} />
 			</div>
 			<Toaster />
-
-			{/* Показываем children только на пути '/user' */}
-			{isUserPath && children}
-		</div>
+		</ThemeProvider>
 	)
 }
 

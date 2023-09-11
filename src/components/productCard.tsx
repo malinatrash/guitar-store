@@ -1,49 +1,52 @@
 import { Product } from '@/models/product'
+import { getProductCategory } from '@/scripts/getProductCategory'
 import '@/styles/index.css'
 import { FC } from 'react'
 import { Button } from './ui/button'
+import { useToast } from './ui/use-toast'
 
 interface Props {
 	product: Product
-	toast: any
 }
 
-const ProductCard: FC<Props> = ({ product, toast }) => {
+const ProductCard: FC<Props> = ({ product }) => {
+	const { toast } = useToast()
 	return (
-		<div className='bg-white p-2 h-[30rem] mobile:h-[26rem] mobile:w-[10rem] mobile:m-0 w-64 flex flex-col border-[3px] border-black rounded-2xl shadow-sm justify-between'>
+		<div className='hover:animate-pulse dark:opacity-90 bg-white p-2 h-[28rem] w-64 flex flex-col border-[2px] border-black/70 rounded-xl justify-between mobile:h-[32rem] mobile:w-11/12'>
 			<img
-				className='h-60 object-scale-down mobile:h-32'
-				src={product.picture}
-				alt={product.picture}
+				className='h-60 object-scale-down mobile:h-80'
+				src={product.image_url}
+				alt={product.product_name}
 			/>
-			<span className='opacity-60 pt-2'>{product.type}</span>
-			<div className='h-full pt-2'>
-				<span>{product.title}</span>
+			<div className='px-1 flex flex-col gap-[2px]'>
+				<span className='pt-2 text-black/50'>
+					{getProductCategory(product.category_id_id)}
+				</span>
+				<span className='text-black'>{product.product_name}</span>
+				<b className='dark:text-black text-xl'>{product.price}₽</b>
 			</div>
-			<div className='flex flex-col gap-1 relative pb-0'>
-				<b>{product.price}</b>
-				<Button
-					onClick={() => {
-						toast({
-							title: 'Товар успешно добавлен в корзину',
-							description: product.title,
-						})
-					}}
-				>
-					Купить
-				</Button>
-				<Button
-					onClick={() => {
-						toast({
-							title: 'Товар добавлен в избранное',
-							description: product.title,
-						})
-					}}
-					variant={'outline'}
-				>
-					В избранное
-				</Button>
-			</div>
+			<Button
+				onClick={() => {
+					toast({
+						title: 'Товар добавлен в корзину',
+						description: product.product_name,
+					})
+				}}
+				variant={'default'}
+			>
+				Купить
+			</Button>
+			<Button
+				onClick={() => {
+					toast({
+						title: 'Товар добавлен в избранное',
+						description: product.product_name,
+					})
+				}}
+				variant={'outline'}
+			>
+				В избранное
+			</Button>
 		</div>
 	)
 }

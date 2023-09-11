@@ -8,14 +8,14 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 	const [isHover, setisHover] = useState(false)
 	return (
 		<div
-			className='flex h-28 hover:text-5xl mobile:h-28 mobile:relative'
+			className='flex hover:text-5xl mobile:relative'
 			onMouseEnter={() => setisHover(true)}
 			onMouseLeave={() => setisHover(false)}
 			onClick={onClick}
 		>
 			<img
-				className={`bg-slate-50 rounded-full transition-all pr-1 ${
-					isHover && 'opacity-50'
+				className={`bg-slate-50 mobile:w-20 mobile:h-20 mobile:object-fill rounded-full transition-all  ${
+					isHover && 'opacity-50 animate-spin'
 				}`}
 				src='/assets/logo.png'
 				alt='logo'
@@ -23,7 +23,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 			<div className='flex flex-col justify-center ml-5'>
 				<span
 					className={`transition-all text-slate-50 text-3xl mobile:text-[0] ${
-						isHover && 'text-5xl opacity-50'
+						isHover && 'opacity-50'
 					}`}
 				>
 					Guitar Store
