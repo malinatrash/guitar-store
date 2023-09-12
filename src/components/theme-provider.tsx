@@ -15,7 +15,7 @@ type ThemeProviderState = {
 
 const initialState: ThemeProviderState = {
 	theme: 'system',
-	setTheme: () => null,
+	setTheme: () => 'system',
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)

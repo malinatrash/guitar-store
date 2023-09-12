@@ -15,10 +15,10 @@ const Header: FC = () => {
 	return (
 		<div className='h-36 p-4 bg-black flex justify-between px-[5%]'>
 			<GuitarStoreLogo onClick={() => navigate('/')} />
-			<div className='flex gap-10 mobile:gap-4 items-center'>
+			<div className='flex gap-10 mobile:gap-3 items-center'>
 				<div>
 					<Button
-						className='transition-all flex justify-around w-36 hover:w-52 mobile:w-14 mobile:hover:w-14'
+						className='transition-all flex justify-around mobile:justify-center w-36 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw] px-2'
 						variant='secondary'
 						onClick={() => navigate('/favorites')}
 					>
@@ -27,7 +27,7 @@ const Header: FC = () => {
 				</div>
 				<div>
 					<Button
-						className='transition-all flex justify-around w-36 hover:w-52 mobile:w-14 mobile:hover:w-14'
+						className='transition-all flex justify-around mobile:justify-center w-36 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw]'
 						variant='secondary'
 						onClick={() => navigate('/cart')}
 					>
@@ -36,7 +36,7 @@ const Header: FC = () => {
 				</div>
 				<div>
 					<Button
-						className='transition-all flex justify-around w-36 hover:w-52 mobile:w-14 mobile:hover:w-14'
+						className='transition-all flex justify-around mobile:justify-center w-36 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw]'
 						variant='secondary'
 						onClick={() => dispatch(show())}
 					>

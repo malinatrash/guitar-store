@@ -16,17 +16,17 @@ export function ModeToggle() {
 		<div className='hover:opacity-50 transition-all'>
 			<DropdownMenu>
 				<DropdownMenuTrigger
-					className='w-36 hover:w-52 mobile:w-14 transition-all flex gap-3'
+					className='hover:w-52 w-36 mobile:w-[13vw] mobile:hover:w-[13vw] transition-all flex gap-3 justify-center'
 					asChild
 				>
 					<Button
-						className='mobile:text-[0] mobile:pl-3 flex justify-around px-2'
+						className='mobile:text-[0] mobile:pl-3 flex justify-around px-2  mobile:justify-center'
 						variant='outline'
 						size='icon'
 					>
 						<div>
-							<Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 mobile:ml-1' />
-							<Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 dark:top-[62px] mobile:ml-1' />
+							<Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 mobile:ml-[16%]' />
+							<Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 dark:top-[62px] mobile:ml-[16%]' />
 							<span className='sr-only'></span>
 						</div>
 						Тема
