@@ -15,7 +15,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 		>
 			<img
 				className={`relative m-0 right-0 bg-slate-50 w-24 mobile:w-[90%] mobile:max-w-[120px] h-[auto] mobile:object-fill self-center rounded-full transition-all  ${
-					isHover && 'opacity-50 animate-spin'
+					isHover && 'opacity-50 animate-spin-slow'
 				}`}
 				src='/assets/logo.png'
 				alt='logo'

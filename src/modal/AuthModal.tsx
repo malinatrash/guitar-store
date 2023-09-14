@@ -1,18 +1,9 @@
-import { Button } from '@/components/ui/button'
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card'
+import SignInForm from '@/components/SignInForm'
+import SignUpForm from '@/components/SignUpForm'
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
 import { hide } from '@/store/slices/authModalSlice'
 import { RootState } from '@/store/store'
-import { Label } from '@radix-ui/react-dropdown-menu'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs'
+import { Tabs, TabsList, TabsTrigger } from '@radix-ui/react-tabs'
 import { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ModalContext } from './modal-context'
@@ -58,74 +49,8 @@ const AuthDialog = () => {
 							Регистрация
 						</TabsTrigger>
 					</TabsList>
-					<TabsContent value='account'>
-						<Card>
-							<CardHeader>
-								<CardTitle>Вход</CardTitle>
-								<CardDescription>
-									Пожалуйста, введите свои данные для входа в систему
-								</CardDescription>
-							</CardHeader>
-							<CardContent className='space-y-2'>
-								<form>
-									<div className='space-y-1'>
-										<Label>Почта</Label>
-										<Input
-											id='email'
-											type='email'
-											placeholder='example@domain.com'
-										/>
-									</div>
-									<div className='space-y-1'>
-										<Label>Пароль</Label>
-										<Input placeholder='Пароль' type='password' id='password' />
-									</div>
-								</form>
-							</CardContent>
-							<CardFooter>
-								<Button onClick={signin}>Войти</Button>
-							</CardFooter>
-						</Card>
-					</TabsContent>
-					<TabsContent value='password'>
-						<Card>
-							<CardHeader>
-								<CardTitle>Регистрация</CardTitle>
-								<CardDescription>
-									Пожалуйста, заполните форму для регистрации в системе
-								</CardDescription>
-							</CardHeader>
-							<CardContent className='space-y-2'>
-								<form action=''>
-									<div className='flex gap-3 justify-between'>
-										<div className='space-y-1 w-1/2'>
-											<Label>Имя</Label>
-											<Input id='firstname' type='text' placeholder='Иван' />
-										</div>
-										<div className='space-y-1 w-1/2'>
-											<Label>Фамилия</Label>
-											<Input id='lastname' type='text' placeholder='Иванов' />
-										</div>
-									</div>
-									<div className='space-y-1'>
-										<Label>Почта</Label>
-										<Input
-											id='email'
-											type='email'
-											placeholder='example@domain.com'
-										/>
-									</div>
-								</form>
-								<div className='space-y-1'>
-									<Label>Пароль</Label>
-									<Input id='password' type='password' placeholder='Пароль' />
-								</div>
-							</CardContent>
-							<CardFooter>
-								<Button onClick={signup}>Зарегистрироваться</Button>
-							</CardFooter>
-						</Card>
-					</TabsContent>
+					<SignInForm signin={signin} />
+					<SignUpForm submit={signup} />
 				</Tabs>
 			</DialogContent>
 		</Dialog>

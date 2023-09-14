@@ -1,7 +1,7 @@
 import { Product } from '@/models/product'
 import { getProductCategory } from '@/scripts/getProductCategory'
 import '@/styles/index.css'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
 
@@ -10,9 +10,19 @@ interface Props {
 }
 
 const ProductCard: FC<Props> = ({ product }) => {
+	const [isFavorite, setisFavorite] = useState(false)
 	const { toast } = useToast()
+	const price = (price: number): string => {
+		if (price > 0) {
+			return `${price}₽`
+		} else if (price === 0) {
+			return 'Бесплатно'
+		} else {
+			return 'Цена по запросу'
+		}
+	}
 	return (
-		<div className='hover:animate-pulse dark:opacity-90 bg-white p-2 h-[28rem] w-64 flex flex-col border-[2px] border-black/70 rounded-xl justify-between mobile:h-[32rem] mobile:w-11/12'>
+		<div className=' hover:animate-pulse dark:opacity-90 bg-white p-2 h-[28rem] w-64 flex flex-col border-[2px] border-black/70 rounded-xl justify-between mobile:h-[32rem] mobile:w-11/12'>
 			<img
 				className='h-60 object-scale-down mobile:h-80'
 				src={product.image_url}
@@ -23,7 +33,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 					{getProductCategory(product.category_id_id)}
 				</span>
 				<span className='text-black'>{product.product_name}</span>
-				<b className='dark:text-black text-xl'>{product.price}₽</b>
+				<b className='dark:text-black text-xl'>{price(product.price)}</b>
 			</div>
 			<Button
 				onClick={() => {
@@ -34,7 +44,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 				}}
 				variant={'default'}
 			>
-				Купить
+				В корзину
 			</Button>
 			<Button
 				onClick={() => {
@@ -42,10 +52,11 @@ const ProductCard: FC<Props> = ({ product }) => {
 						title: 'Товар добавлен в избранное',
 						description: product.product_name,
 					})
+					setisFavorite(!isFavorite)
 				}}
 				variant={'outline'}
 			>
-				В избранное
+				{!isFavorite ? 'В избранное' : 'Удалить'}
 			</Button>
 		</div>
 	)

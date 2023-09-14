@@ -11,7 +11,7 @@ import { ModeToggle } from './ui/modeToggle'
 const Header: FC = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const isAuth = useSelector((state: RootState) => state.auth.isAuth)
+	const user = useSelector((state: RootState) => state.user)
 	return (
 		<div className='h-36 p-4 bg-black flex justify-between px-[5%]'>
 			<GuitarStoreLogo onClick={() => navigate('/')} />
@@ -42,7 +42,7 @@ const Header: FC = () => {
 					>
 						<User />{' '}
 						<span className='mobile:text-[0]'>
-							{isAuth ? 'Профиль' : 'Войти'}
+							{user.firstname !== '' ? `${user.firstname}` : 'Войти'}
 						</span>
 					</Button>
 				</div>
