@@ -1,17 +1,16 @@
+import { useWishList } from '@/hooks/useWishList'
 import { Product } from '@/models/product'
 import { getProductCategory } from '@/scripts/getProductCategory'
 import '@/styles/index.css'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { Button } from './ui/button'
-import { useToast } from './ui/use-toast'
 
 interface Props {
 	product: Product
 }
 
 const ProductCard: FC<Props> = ({ product }) => {
-	const [isFavorite, setisFavorite] = useState(false)
-	const { toast } = useToast()
+	const wishList = useWishList(product)
 	const price = (price: number): string => {
 		if (price > 0) {
 			return `${price}₽`
@@ -21,6 +20,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 			return 'Цена по запросу'
 		}
 	}
+
 	return (
 		<div className=' hover:animate-pulse dark:opacity-90 bg-white p-2 h-[28rem] w-64 flex flex-col border-[2px] border-black/70 rounded-xl justify-between mobile:h-[32rem] mobile:w-11/12'>
 			<img
@@ -37,26 +37,17 @@ const ProductCard: FC<Props> = ({ product }) => {
 			</div>
 			<Button
 				onClick={() => {
-					toast({
-						title: 'Товар добавлен в корзину',
-						description: product.product_name,
-					})
+					// 	toast({
+					// 		title: 'Товар добавлен в корзину',
+					// 		description: product.product_name,
+					// 	})
 				}}
 				variant={'default'}
 			>
 				В корзину
 			</Button>
-			<Button
-				onClick={() => {
-					toast({
-						title: 'Товар добавлен в избранное',
-						description: product.product_name,
-					})
-					setisFavorite(!isFavorite)
-				}}
-				variant={'outline'}
-			>
-				{!isFavorite ? 'В избранное' : 'Удалить'}
+			<Button onClick={wishList.addToWishlist} variant={'outline'}>
+				{!wishList.isFavorite ? 'В избранное' : 'Удалить'}
 			</Button>
 		</div>
 	)

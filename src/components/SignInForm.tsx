@@ -1,6 +1,7 @@
+import { useSignIn } from '@/hooks/useSignIn'
 import { Label } from '@radix-ui/react-dropdown-menu'
 import { TabsContent } from '@radix-ui/react-tabs'
-import { FC } from 'react'
+import { useState } from 'react'
 import { Button } from './ui/button'
 import {
 	Card,
@@ -12,11 +13,11 @@ import {
 } from './ui/card'
 import { Input } from './ui/input'
 
-interface ISignInForm {
-	signin: () => void
-}
+const SignInForm = () => {
+	const [email, setemail] = useState<string>('')
+	const [password, setpassword] = useState<string>('')
+	const data = useSignIn({ email, password })
 
-const SignInForm: FC<ISignInForm> = ({ signin }) => {
 	return (
 		<TabsContent value='account'>
 			<Card>
@@ -30,16 +31,34 @@ const SignInForm: FC<ISignInForm> = ({ signin }) => {
 					<form>
 						<div className='space-y-1'>
 							<Label>Почта</Label>
-							<Input id='email' type='email' placeholder='example@domain.com' />
+							<Input
+								onChange={e => setemail(e.target.value)}
+								value={email}
+								id='email'
+								type='email'
+								placeholder='example@domain.com'
+							/>
 						</div>
 						<div className='space-y-1'>
 							<Label>Пароль</Label>
-							<Input placeholder='Пароль' type='password' id='password' />
+							<Input
+								onChange={e => setpassword(e.target.value)}
+								value={password}
+								placeholder='Пароль'
+								type='password'
+								id='password'
+							/>
 						</div>
 					</form>
 				</CardContent>
 				<CardFooter>
-					<Button onClick={signin}>Войти</Button>
+					<Button onClick={() => data.fetchResponse()}>
+						{data.loading ? (
+							<img className='w-full p-4' src='/assets/loader.svg' alt='' />
+						) : (
+							'Войти'
+						)}
+					</Button>
 				</CardFooter>
 			</Card>
 		</TabsContent>

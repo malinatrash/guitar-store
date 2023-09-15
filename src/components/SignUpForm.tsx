@@ -1,7 +1,7 @@
 import { useSignUp } from '@/hooks/useSignUp'
 import { Label } from '@radix-ui/react-dropdown-menu'
 import { TabsContent } from '@radix-ui/react-tabs'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { Button } from './ui/button'
 
 import {
@@ -14,11 +14,7 @@ import {
 } from './ui/card'
 import { Input } from './ui/input'
 
-interface ISignUpForm {
-	submit: () => void
-}
-
-const SignUpForm: FC<ISignUpForm> = ({ submit }) => {
+const SignUpForm = () => {
 	const [firstname, setfirstname] = useState<string>('')
 	const [lastname, setlastname] = useState<string>('')
 	const [email, setemail] = useState<string>('')
@@ -32,7 +28,7 @@ const SignUpForm: FC<ISignUpForm> = ({ submit }) => {
 	})
 
 	const signUp = () => {
-		data.fetchResponse(submit)
+		data.fetchResponse()
 	}
 
 	return (

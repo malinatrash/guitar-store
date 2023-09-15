@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router'
 import { Button } from './ui/button'
 import GuitarStoreLogo from './ui/guitarStoreLogo'
 import { ModeToggle } from './ui/modeToggle'
+import Quantity from './ui/quantity'
 
 const Header: FC = () => {
 	const dispatch = useDispatch()
@@ -18,25 +19,28 @@ const Header: FC = () => {
 			<div className='flex gap-10 mobile:gap-3 items-center'>
 				<div>
 					<Button
-						className='transition-all flex justify-around mobile:justify-center w-36 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw] px-2'
+						className='transition-all flex justify-around mobile:justify-center w-40 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw] px-2'
 						variant='secondary'
 						onClick={() => navigate('/favorites')}
 					>
-						<Heart /> <span className='mobile:text-[0]'>Избранное</span>
+						<Heart />{' '}
+						<span className='mobile:text-[0] flex-nowrap mr-1'>Избранное</span>
+						<Quantity quantity={user.favorites?.length ?? 0} />
 					</Button>
 				</div>
 				<div>
 					<Button
-						className='transition-all flex justify-around mobile:justify-center w-36 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw]'
+						className='transition-all flex justify-around mobile:justify-center w-40 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw]'
 						variant='secondary'
 						onClick={() => navigate('/cart')}
 					>
 						<ShoppingCart /> <span className='mobile:text-[0]'>Корзина</span>
+						<Quantity quantity={user.cart?.length ?? 0} />
 					</Button>
 				</div>
 				<div>
 					<Button
-						className='transition-all flex justify-around mobile:justify-center w-36 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw]'
+						className='transition-all flex justify-around mobile:justify-center w-40 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw]'
 						variant='secondary'
 						onClick={() => dispatch(show())}
 					>

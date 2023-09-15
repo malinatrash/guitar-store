@@ -19,14 +19,6 @@ const AuthDialog = () => {
 		}
 	}
 
-	const signin = () => {
-		dispatch(hide())
-	}
-
-	const signup = () => {
-		dispatch(hide())
-	}
-
 	useEffect(() => {
 		setShow(isShown)
 	}, [isShown])
@@ -49,8 +41,8 @@ const AuthDialog = () => {
 							Регистрация
 						</TabsTrigger>
 					</TabsList>
-					<SignInForm signin={signin} />
-					<SignUpForm submit={signup} />
+					<SignInForm />
+					<SignUpForm />
 				</Tabs>
 			</DialogContent>
 		</Dialog>
