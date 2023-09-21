@@ -14,24 +14,18 @@ export const useWishList = (product: Product) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		for (const prod of user.favorites ?? []) {
-			if (prod.product_id === product.product_id) {
-				setisFavorite(true)
-				return
-			}
-			setisFavorite(false)
-		}
-	}, [user])
+		if (!user.favorites) return
+		const isFavorite = user.favorites!.some(
+			prod => prod.product_id === product.product_id
+		)
+		setisFavorite(isFavorite)
+	}, [user.favorites, product.product_id])
 
 	const addToWishlist = async () => {
 		const res = await sendWishlistItem({
 			user_id: user.user_id ?? -1,
 			product_id: product.product_id,
 		})
-		console.log(user.user_id)
-
-		console.log(res)
-
 		if (res === 200 || res == 201) {
 			if (isFavorite) {
 				const wishlist = await fetchWishList(user.user_id ?? -1)
@@ -49,6 +43,13 @@ export const useWishList = (product: Product) => {
 				})
 			}
 		} else {
+			if (user.role == 'guest') {
+				toast({
+					title: 'Войдите в систему',
+					variant: 'destructive',
+				})
+				return
+			}
 			toast({
 				title: 'Произошла ошибка',
 				variant: 'destructive',

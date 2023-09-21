@@ -21,6 +21,10 @@ module.exports = {
 			},
 		},
 		extend: {
+			boxShadow: {
+				frame: '0px 0px 30px 5px rgba(0, 0, 0, 0.3)',
+				card: '-10px 0px 30px 10px rgba(0, 0, 0, 0.3)',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

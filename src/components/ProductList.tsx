@@ -8,7 +8,7 @@ interface IProductList {
 
 const ProductList: FC<IProductList> = ({ productList }) => {
 	return (
-		<div className='flex gap-5 p-6 mobile:p-2 mobile:gap-2 wrap flex-wrap mobile:justify-center'>
+		<div className='flex gap-5 px-0 mobile:p-2 wrap flex-wrap justify-start mobile:justify-center'>
 			{productList.map(product => (
 				<ProductCard key={product.product_id} product={product} />
 			))}
