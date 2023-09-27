@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Fuggles&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+	font-family: 'Fuggles', cursive;
+}
 
 @layer base {
 	:root {

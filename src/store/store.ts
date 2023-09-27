@@ -1,3 +1,4 @@
+import { sortProductListSlice } from './slices/productListSort'
 import { configureStore } from '@reduxjs/toolkit'
 import authModalSlice from './slices/authModalSlice'
 import { productFilter } from './slices/productFilterSlice'
@@ -8,6 +9,7 @@ export const store = configureStore({
 		authModal: authModalSlice,
 		user: userSlice,
 		productFilter: productFilter.reducer,
+		sortProductList: sortProductListSlice.reducer,
 	},
 })
 

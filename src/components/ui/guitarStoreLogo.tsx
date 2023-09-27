@@ -21,13 +21,13 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 				alt='logo'
 			/>
 			<div className='flex flex-col justify-center ml-5 mobile:ml-0'>
-				<span
-					className={`transition-all text-slate-50 text-3xl mobile:text-[0] ${
+				<h1
+					className={`transition-all text-slate-50 text-[6rem] mobile:text-[0] ${
 						isHover && 'opacity-50'
 					}`}
 				>
 					Guitar Store
-				</span>
+				</h1>
 			</div>
 		</div>
 	)
