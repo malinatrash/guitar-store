@@ -4,7 +4,7 @@ export interface Product {
 	product_description: string
 	price: number
 	in_stock: boolean
-	vendor: number
+	vendor: Vendor
 	country_of_origin: string
 	year_of_production: number
 	image_url: string

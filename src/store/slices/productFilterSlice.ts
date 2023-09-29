@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export interface ProductFilterState {
 	onlyInStock: boolean
-	vendors: string[]
+	vendors: Vendor[]
 	countryOfOrigin: string[]
 	priceFrom: number
 	priceTo: number
@@ -29,9 +29,14 @@ export const productFilter = createSlice({
 		setOnlyInStock: (state, actions) => {
 			state.onlyInStock = actions.payload
 		},
-		setVendors: (state, actions) => {
-			state.vendors = []
-			state.vendors = [...actions.payload]
+		addVendor: (state, actions) => {
+			state.vendors.push(actions.payload)
+		},
+		deleteVendor: (state, action) => {
+			const idToDelete = action.payload
+			state.vendors = [
+				...state.vendors.filter(vendor => vendor.id !== idToDelete),
+			]
 		},
 		setCountry: (state, actions) => {
 			state.countryOfOrigin = []
@@ -44,7 +49,8 @@ export const {
 	setupPriceFrom,
 	setupPriceTo,
 	setOnlyInStock,
-	setVendors,
+	addVendor,
+	deleteVendor,
 	setCountry,
 } = productFilter.actions
 
