@@ -1,14 +1,14 @@
 export interface Product {
-	product_id: number
-	product_name: string
-	product_description: string
-	price: number
-	in_stock: boolean
-	vendor: Vendor
-	country_of_origin: string
-	year_of_production: number
-	image_url: string
-	category_id_id: number
+	product_id: number;
+	product_name: string;
+	product_description: string;
+	price: number;
+	in_stock: boolean;
+	vendor: number;
+	country_of_origin: string;
+	year_of_production: number;
+	image_url: string;
+	category_id_id: number;
 }
 
 // export const mockProductList: Product[] = [

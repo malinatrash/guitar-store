@@ -1,11 +1,11 @@
-import { FC, useState } from 'react'
+import { FC, useState } from 'react';
 
 interface Props {
-	onClick?: () => void
+	onClick?: () => void;
 }
 
 const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
-	const [isHover, setisHover] = useState(false)
+	const [isHover, setisHover] = useState(false);
 	return (
 		<div
 			className='flex hover:text-5xl mobile:relative'
@@ -22,7 +22,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 			/>
 			<div className='flex flex-col justify-center ml-5 mobile:ml-0'>
 				<h1
-					className={`transition-all text-slate-50 text-[6rem] mobile:text-[0] ${
+					className={`transition-all text-slate-50 text-[5rem] mobile:text-[0] ${
 						isHover && 'opacity-50'
 					}`}
 				>
@@ -30,7 +30,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 				</h1>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default GuitarStoreLogo
+export default GuitarStoreLogo;

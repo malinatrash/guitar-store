@@ -1,18 +1,16 @@
-import { fetchVendors } from '@/api/fetchVendors'
-import { useEffect, useState } from 'react'
+import { fetchVendors } from '@/api/fetchVendors';
+import { useEffect, useState } from 'react';
 
 export const useVendors = () => {
-	const [vendors, setVendors] = useState<Vendor[]>([])
+	const [vendors, setVendors] = useState<Vendor[]>([]);
 	useEffect(() => {
 		try {
 			fetchVendors().then(r => {
-				console.log(r)
-
-				setVendors(r)
-			})
+				setVendors(r);
+			});
 		} catch (error) {
-			console.error('Ошибка при загрузке данных о поставщиках:', error)
+			console.error('Ошибка при загрузке данных о поставщиках:', error);
 		}
-	}, [])
-	return vendors
-}
+	}, []);
+	return vendors;
+};
