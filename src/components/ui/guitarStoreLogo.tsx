@@ -22,7 +22,7 @@ const GuitarStoreLogo: FC<Props> = ({ onClick }) => {
 			/>
 			<div className='flex flex-col justify-center ml-5 mobile:ml-0'>
 				<h1
-					className={`transition-all text-slate-50 text-[5rem] mobile:text-[0] ${
+					className={`transition-all text-slate-50 text-[3.3rem] whitespace-nowrap mobile:text-[0] ${
 						isHover && 'opacity-50'
 					}`}
 				>

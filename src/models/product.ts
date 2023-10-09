@@ -5,7 +5,7 @@ export interface Product {
 	price: number;
 	in_stock: boolean;
 	vendor: number;
-	country_of_origin: string;
+	country_of_origin: number;
 	year_of_production: number;
 	image_url: string;
 	category_id_id: number;

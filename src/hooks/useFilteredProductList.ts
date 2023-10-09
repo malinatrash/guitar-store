@@ -8,21 +8,6 @@ export const useFilteredProductList = (productList: Product[]) => {
 	const [filtered, setFiltered] = useState<Product[]>([]);
 	const sort = useSelector((state: RootState) => state.sortProductList);
 
-	const filterByVendor = async () => {
-		if (filters.vendors.length === 0) {
-			setFiltered([...productList]);
-		} else {
-			const selectedVendorIds = filters.vendors.map(vendor => vendor.id);
-			const filteredProducts = productList.filter(product => {
-				return selectedVendorIds.includes(product.vendor);
-			});
-			console.log(filtered);
-			console.log(filteredProducts);
-			await setFiltered(filteredProducts);
-			console.log(filtered);
-		}
-	};
-
 	useEffect(() => {
 		sort.toIncrease
 			? setFiltered([...filtered].sort((a, b) => a.price - b.price))
@@ -30,7 +15,17 @@ export const useFilteredProductList = (productList: Product[]) => {
 	}, [sort.toDecrease, sort.toIncrease]);
 
 	useEffect(() => {
-		filterByVendor();
+		if (filters.vendors.length === 0) {
+			setFiltered([...productList]);
+		} else {
+			const selectedVendorIds = filters.vendors.map(vendor => vendor.id);
+			const filteredProducts = productList.filter(product =>
+				selectedVendorIds.includes(product.vendor)
+			);
+
+			setFiltered(filteredProducts);
+			console.log(filtered);
+		}
 	}, [filters.vendors]);
 
 	useEffect(() => {
