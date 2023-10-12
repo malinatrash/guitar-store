@@ -6,9 +6,10 @@ interface IProductImage {
 
 const ProductImage: FC<IProductImage> = ({ img_url }) => {
 	return (
-		<div className='transition-all duration-200 border h-full w-full ease-linear hover:animate-pulse bg-white p-2 px-10 flex flex-col rounded-xl'>
-			<img className='object-scale-down w-full max-h-[20rem]' src={img_url} />
-		</div>
+		<img
+			className='transition-all duration-200 ease-linear hover:animate-pulse bg-white p-2 px-10 rounded-xl max-w-[22rem] min-h-[30rem] object-contain'
+			src={img_url}
+		/>
 	);
 };
 

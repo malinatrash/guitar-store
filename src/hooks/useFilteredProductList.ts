@@ -12,7 +12,7 @@ export const useFilteredProductList = (productList: Product[]) => {
 		sort.toIncrease
 			? setFiltered([...filtered].sort((a, b) => a.price - b.price))
 			: setFiltered([...filtered].sort((a, b) => b.price - a.price));
-	}, [sort.toDecrease, sort.toIncrease]);
+	}, [sort.toDecrease, sort.toIncrease, filters.vendors]);
 
 	useEffect(() => {
 		if (filters.vendors.length === 0) {
@@ -22,11 +22,9 @@ export const useFilteredProductList = (productList: Product[]) => {
 			const filteredProducts = productList.filter(product =>
 				selectedVendorIds.includes(product.vendor)
 			);
-
 			setFiltered(filteredProducts);
-			console.log(filtered);
 		}
-	}, [filters.vendors]);
+	}, [productList, filters.vendors]);
 
 	useEffect(() => {
 		if (filters.onlyInStock) {
@@ -45,7 +43,7 @@ export const useFilteredProductList = (productList: Product[]) => {
 				)
 			);
 		}
-	}, [productList, filters]);
+	}, [productList, filters.priceFrom, filters.priceTo]);
 
 	return filtered;
 };
