@@ -12,7 +12,7 @@ const ProductVendor: FC<IProductVendor> = ({ vendorId }) => {
 		return vendor.map(e => e.name).join(' ');
 	};
 	return (
-		<div>
+		<div className='whitespace-nowrap'>
 			<span className='font-bold text-4xl'> Производитель – </span>{' '}
 			<span className='font-medium text-3xl'>{getVendorName()}</span>
 		</div>

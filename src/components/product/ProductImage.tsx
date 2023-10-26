@@ -7,7 +7,7 @@ interface IProductImage {
 const ProductImage: FC<IProductImage> = ({ img_url }) => {
 	return (
 		<img
-			className='transition-all duration-200 ease-linear hover:animate-pulse bg-white p-2 px-10 rounded-xl max-w-[22rem] min-h-[30rem] object-contain'
+			className='transition-all duration-200 ease-linear hover:animate-pulse bg-white p-2 px-4 rounded-xl max-w-[26rem] min-h-[30rem] object-contain mobile:w-[90%] mobile:max-w-full'
 			src={img_url}
 		/>
 	);

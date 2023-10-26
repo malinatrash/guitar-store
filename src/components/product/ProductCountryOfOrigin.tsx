@@ -12,7 +12,7 @@ const ProductCountryOfOrigin: FC<IProductCountryOfOrigin> = ({ countryId }) => {
 		return country.map(e => e.name).join(' ');
 	};
 	return (
-		<span className='font-bold text-4xl'>
+		<span className='font-bold text-4xl whitespace-nowrap'>
 			Cтрана производства –{' '}
 			<span className='font-medium opacity-70'>{getCountryName()}</span>
 		</span>
