@@ -1,13 +1,23 @@
-import { useComments } from '@/hooks/useComments';
-import { FC } from 'react';
+import { Comment } from '@/models/comment'
+import { LucideLoader } from 'lucide-react'
+import { FC } from 'react'
+import CommentItem from './commentItem'
 
 interface CommentsProps {
-	product_id: number;
+	comments: Comment[]
+	isLoading: boolean
 }
 
-const Comments: FC<CommentsProps> = ({ product_id }) => {
-	const comments = useComments(product_id);
-	return <div>{comments}</div>;
-};
+const Comments: FC<CommentsProps> = ({ comments, isLoading }) => {
+	return (
+		<div className='flex gap-4 flex-col pb-6'>
+			{isLoading ? (
+				comments.map(e => <CommentItem comment={e} />)
+			) : (
+				<LucideLoader className='animate-spin' width='40px' height='40px' />
+			)}
+		</div>
+	)
+}
 
-export default Comments;
+export default Comments

@@ -1,21 +1,39 @@
-import Header from '@/components/header';
-import ProductCountryOfOrigin from '@/components/product/ProductCountryOfOrigin';
-import ProductDescription from '@/components/product/ProductDescription';
-import ProductImage from '@/components/product/ProductImage';
-import ProductName from '@/components/product/ProductName';
-import ProductVendor from '@/components/product/ProductVendor';
-import ProductYearOfProduction from '@/components/product/ProductYearOfProduction';
-import { ThemeProvider } from '@/components/theme-provider';
-import { Button } from '@/components/ui/button';
-import Comments from '@/components/ui/comments';
-import { Toaster } from '@/components/ui/toaster';
-import { useWishList } from '@/hooks/useWishList';
-import { RootState } from '@/store/store';
-import { useSelector } from 'react-redux';
+import Header from '@/components/header'
+import ProductCountryOfOrigin from '@/components/product/ProductCountryOfOrigin'
+import ProductDescription from '@/components/product/ProductDescription'
+import ProductImage from '@/components/product/ProductImage'
+import ProductName from '@/components/product/ProductName'
+import ProductVendor from '@/components/product/ProductVendor'
+import ProductYearOfProduction from '@/components/product/ProductYearOfProduction'
+import { ThemeProvider } from '@/components/theme-provider'
+import { Button } from '@/components/ui/button'
+import Comments from '@/components/ui/comments'
+import { Toaster } from '@/components/ui/toaster'
+import { useWishList } from '@/hooks/useWishList'
+import { Comment } from '@/models/comment'
+import { useGetCommentsQuery } from '@/store/api/comments.api'
+import { RootState } from '@/store/store'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+
+interface CommentResponse {
+	comments: Comment[]
+}
 
 const Product = () => {
-	const product = useSelector((state: RootState) => state.currentProduct);
-	const wishList = useWishList(product.product!);
+	const product = useSelector((state: RootState) => state.currentProduct)
+	const wishList = useWishList(product.product!)
+
+	const { data, isLoading, isFetching } = useGetCommentsQuery(
+		product.product?.product_id ?? -1
+	)
+	const [comments, setComments] = useState<CommentResponse[]>()
+	const [currentPage, setcurrentPage] = useState(0)
+	useEffect(() => {
+		console.log(data[currentPage])
+
+		console.log(data)
+	}, [isLoading, isFetching, data])
 
 	return (
 		<ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
@@ -70,13 +88,13 @@ const Product = () => {
 					</h1>
 				</div>
 			</div>
-			<div className='ml-16 flex flex-col gap-3 w-full'>
+			<div className='px-16 flex flex-col gap-3'>
 				<h1 className='text-[60px]'>Отзывы</h1>
-				<Comments />
+				<Comments isLoading={isLoading} comments={comments[currentPage]} />
 			</div>
 			<Toaster />
 		</ThemeProvider>
-	);
-};
+	)
+}
 
-export default Product;
+export default Product
