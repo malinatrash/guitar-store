@@ -11,7 +11,7 @@ const CommentItem: FC<IComment> = ({ comment }) => {
 		alert()
 	}
 	return (
-		<div className='flex px-8 py-4 bg-primary rounded-2xl w-fit gap-8 items-center'>
+		<div className='flex px-8 py-4 bg-primary rounded-2xl gap-10 items-center w-fit transition-all hover:scale-[102%]'>
 			<div className='flex gap-4 flex-col'>
 				<div className='flex justify-between'>
 					<span className='text-secondary font-medium text-xl'>

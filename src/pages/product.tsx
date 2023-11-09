@@ -16,10 +16,6 @@ import { RootState } from '@/store/store'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-interface CommentResponse {
-	comments: Comment[]
-}
-
 const Product = () => {
 	const product = useSelector((state: RootState) => state.currentProduct)
 	const wishList = useWishList(product.product!)
@@ -27,13 +23,31 @@ const Product = () => {
 	const { data, isLoading, isFetching } = useGetCommentsQuery(
 		product.product?.product_id ?? -1
 	)
-	const [comments, setComments] = useState<CommentResponse[]>()
-	const [currentPage, setcurrentPage] = useState(0)
-	useEffect(() => {
-		console.log(data[currentPage])
 
-		console.log(data)
+	const [comments, setComments] = useState<Comment[]>([])
+	const [visibleComments, setVisibleComments] = useState<Comment[]>([])
+	const [currentPage, setCurrentPage] = useState<number>(1)
+	const commentsPerPage = 10
+
+	useEffect(() => {
+		if (data) {
+			setComments(data.slice(0, commentsPerPage))
+			setVisibleComments(data.slice(0, commentsPerPage))
+		}
 	}, [isLoading, isFetching, data])
+
+	const handlePageChange = (pageNumber: number) => {
+		const startIndex = (pageNumber - 1) * commentsPerPage
+		const endIndex = startIndex + commentsPerPage
+		setComments(data ? data.slice(startIndex, endIndex) : [])
+		setCurrentPage(pageNumber)
+	}
+
+	const handleShowMore = () => {
+		const newEndIndex = visibleComments.length + commentsPerPage
+		const newVisibleComments = data ? data.slice(0, newEndIndex) : []
+		setVisibleComments(newVisibleComments)
+	}
 
 	return (
 		<ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
@@ -88,9 +102,22 @@ const Product = () => {
 					</h1>
 				</div>
 			</div>
-			<div className='px-16 flex flex-col gap-3'>
+			<div className='px-16 flex flex-col gap-3 py-16'>
 				<h1 className='text-[60px]'>Отзывы</h1>
-				<Comments isLoading={isLoading} comments={comments[currentPage]} />
+				<div className='flex gap-8 flex-wrap basis-auto'>
+					<Comments
+						isLoading={!isLoading}
+						comments={visibleComments ? visibleComments : []}
+					/>
+				</div>
+				{visibleComments.length < (data ? data.length : 0) && (
+					<Button
+						className='opacity-30 hover:opacity-95 transition-all w-96 self-center py-4 hover:scale-105'
+						onClick={handleShowMore}
+					>
+						Показать еще
+					</Button>
+				)}
 			</div>
 			<Toaster />
 		</ThemeProvider>

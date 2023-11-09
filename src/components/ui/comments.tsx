@@ -9,8 +9,10 @@ interface CommentsProps {
 }
 
 const Comments: FC<CommentsProps> = ({ comments, isLoading }) => {
+	console.log(comments[0])
+
 	return (
-		<div className='flex gap-4 flex-col pb-6'>
+		<div className={`flex gap-4 pb-6 flex-wrap justify-center`}>
 			{isLoading ? (
 				comments.map(e => <CommentItem comment={e} />)
 			) : (
