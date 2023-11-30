@@ -8,40 +8,57 @@ import ProductYearOfProduction from '@/components/product/ProductYearOfProductio
 import { ThemeProvider } from '@/components/theme-provider'
 import { Button } from '@/components/ui/button'
 import Comments from '@/components/ui/comments'
+import { Input } from '@/components/ui/input'
 import { Toaster } from '@/components/ui/toaster'
 import { useWishList } from '@/hooks/useWishList'
 import { Comment } from '@/models/comment'
-import { useGetCommentsQuery } from '@/store/api/comments.api'
+import {
+	useCreateCommentsMutation,
+	useGetCommentsQuery,
+} from '@/store/api/comments.api'
 import { RootState } from '@/store/store'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 const Product = () => {
+	const user = useSelector((state: RootState) => state.user)
 	const product = useSelector((state: RootState) => state.currentProduct)
 	const wishList = useWishList(product.product!)
+	const [comment, setcomment] = useState<string>()
+
+	const co = useCreateCommentsMutation()
+
+	const addReview = async () => {
+		try {
+			const date = new Date()
+			const commentData: Comment = {
+				id: 1,
+				comment_date: new Date(),
+				comment_text: comment ?? '',
+				likes_count: 0,
+				product_id: product?.product?.product_id ?? 0,
+				user_name: `${user?.firstname || ''} ${user?.lastname || ''}`,
+			}
+
+			const response = await co[0](commentData)
+			console.log('Ответ сервера:', response)
+		} catch (error) {
+			console.error('Ошибка при отправке отзыва:', error)
+		}
+	}
 
 	const { data, isLoading, isFetching } = useGetCommentsQuery(
 		product.product?.product_id ?? -1
 	)
 
-	const [comments, setComments] = useState<Comment[]>([])
 	const [visibleComments, setVisibleComments] = useState<Comment[]>([])
-	const [currentPage, setCurrentPage] = useState<number>(1)
 	const commentsPerPage = 10
 
 	useEffect(() => {
 		if (data) {
-			setComments(data.slice(0, commentsPerPage))
 			setVisibleComments(data.slice(0, commentsPerPage))
 		}
 	}, [isLoading, isFetching, data])
-
-	const handlePageChange = (pageNumber: number) => {
-		const startIndex = (pageNumber - 1) * commentsPerPage
-		const endIndex = startIndex + commentsPerPage
-		setComments(data ? data.slice(startIndex, endIndex) : [])
-		setCurrentPage(pageNumber)
-	}
 
 	const handleShowMore = () => {
 		const newEndIndex = visibleComments.length + commentsPerPage
@@ -117,6 +134,19 @@ const Product = () => {
 					>
 						Показать еще
 					</Button>
+				)}
+				{user.user_id != -1 ? (
+					<div className='flex gap-2 my-4'>
+						<Input
+							onChange={e => setcomment(e.target.value)}
+							placeholder='Отзыв'
+						/>
+						<Button onClick={addReview}>Отправить</Button>
+					</div>
+				) : (
+					<span className='font-medium text-lg'>
+						Войдите в аккаунт чтобы оставлять отзывы
+					</span>
 				)}
 			</div>
 			<Toaster />

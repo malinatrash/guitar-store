@@ -4,5 +4,5 @@ export interface Comment {
 	product_id: number
 	comment_text: string
 	likes_count: number
-	comment_date: string
+	comment_date: Date
 }
