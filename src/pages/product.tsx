@@ -33,7 +33,7 @@ const Product = () => {
 			const date = new Date()
 			const commentData: Comment = {
 				id: 1,
-				comment_date: new Date(),
+				comment_date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
 				comment_text: comment ?? '',
 				likes_count: 0,
 				product_id: product?.product?.product_id ?? 0,
