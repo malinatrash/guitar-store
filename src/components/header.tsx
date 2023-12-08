@@ -21,7 +21,7 @@ const Header: FC = () => {
 					<Button
 						className='transition-all flex justify-around mobile:justify-center w-40 hover:w-52 mobile:w-[13vw] mobile:hover:w-[13vw] px-2'
 						variant='secondary'
-						onClick={() => navigate('/favorites')}
+						onClick={() => navigate('/wishlist')}
 					>
 						<Heart />{' '}
 						<span className='mobile:text-[0] flex-nowrap mr-1'>Избранное</span>

@@ -11,7 +11,7 @@ import Comments from '@/components/ui/comments'
 import { Input } from '@/components/ui/input'
 import { Toaster } from '@/components/ui/toaster'
 import { useWishList } from '@/hooks/useWishList'
-import { Comment } from '@/models/comment'
+import { Comment, CommentBody } from '@/models/comment'
 import {
 	useCreateCommentsMutation,
 	useGetCommentsQuery,
@@ -30,14 +30,10 @@ const Product = () => {
 
 	const addReview = async () => {
 		try {
-			const date = new Date()
-			const commentData: Comment = {
-				id: 1,
-				comment_date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
-				comment_text: comment ?? '',
-				likes_count: 0,
+			const commentData: CommentBody = {
+				user_id: user.user_id ?? 0,
 				product_id: product?.product?.product_id ?? 0,
-				user_name: `${user?.firstname || ''} ${user?.lastname || ''}`,
+				comment_text: comment ?? '',
 			}
 
 			const response = await co[0](commentData)

@@ -1,4 +1,4 @@
-import { Comment } from '@/models/comment'
+import { Comment, CommentBody } from '@/models/comment'
 import { api } from './api'
 
 const commentsApi = api.injectEndpoints({
@@ -9,7 +9,7 @@ const commentsApi = api.injectEndpoints({
 			},
 		}),
 		createComments: builder.mutation({
-			query: (commentsData: Comment) => ({
+			query: (commentsData: CommentBody) => ({
 				body: commentsData,
 				url: '/comments',
 				method: 'POST',
