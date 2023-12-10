@@ -8,7 +8,7 @@ interface CartsResponse {
 	status_code: number
 }
 
-export const fetchCart = async (user_id: number) => {
+export const fetchShoppingCart = async (user_id: number) => {
 	try {
 		const response = await axios.get<CartsResponse>(
 			`${domain}carts?&id=${user_id}&${format}`

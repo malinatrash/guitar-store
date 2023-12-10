@@ -1,4 +1,4 @@
-import { fetchCart } from '@/api/fetchCart'
+import { fetchShoppingCart } from '@/api/fetchShoppingCart'
 import { fetchWishList } from '@/api/fetchWishlist'
 import { SignInProps, signIn } from '@/api/signin'
 import { toast } from '@/components/ui/use-toast'
@@ -24,7 +24,7 @@ export const useSignIn = (data: SignInProps) => {
 			dispatch(setupUser(response.data.user))
 			const wishlist = await fetchWishList(response.data.user?.user_id ?? -1)
 			dispatch(setupWishlist(wishlist))
-			const cart = await fetchCart(response.data.user?.user_id ?? -1)
+			const cart = await fetchShoppingCart(response.data.user?.user_id ?? -1)
 			dispatch(setupCart(cart))
 			setLoading(false)
 			dispatch(hide())

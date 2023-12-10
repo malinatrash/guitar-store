@@ -22,39 +22,32 @@ export const useWishList = (product: Product) => {
 	}, [user.favorites, product.product_id])
 
 	const addToWishlist = async () => {
+		const userId = user.user_id ?? -1
 		const res = await sendWishlistItem({
-			user_id: user.user_id ?? -1,
+			user_id: userId,
 			product_id: product.product_id,
 		})
-		if (res === 200 || res == 201) {
-			if (isFavorite) {
-				const wishlist = await fetchWishList(user.user_id ?? -1)
-				dispatch(setupWishlist(wishlist))
-				toast({
-					title: 'Товар удален из избранного',
-					description: product.product_name,
-				})
-			} else {
-				const wishlist = await fetchWishList(user.user_id ?? -1)
-				dispatch(setupWishlist(wishlist))
-				toast({
-					title: 'Товар добавлен в избранное',
-					description: product.product_name,
-				})
-			}
-		} else {
-			if (user.role == 'guest') {
-				toast({
-					title: 'Войдите в систему',
-					variant: 'destructive',
-				})
-				return
-			}
+
+		const wishlist = await fetchWishList(userId)
+		dispatch(setupWishlist(wishlist))
+
+		if (res === 200 || res === 201) {
+			const toastTitle = isFavorite
+				? 'Товар удален из избранного'
+				: 'Товар добавлен в избранное'
 			toast({
-				title: 'Произошла ошибка',
+				title: toastTitle,
+				description: product.product_name,
+			})
+		} else {
+			const toastTitle =
+				user.role === 'guest' ? 'Войдите в систему' : 'Произошла ошибка'
+			toast({
+				title: toastTitle,
 				variant: 'destructive',
 			})
 		}
 	}
+
 	return { addToWishlist, isFavorite }
 }
