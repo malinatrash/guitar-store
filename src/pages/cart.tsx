@@ -1,3 +1,4 @@
+import { DataTable, columns } from '@/components/DataTable'
 import Header from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
@@ -12,7 +13,13 @@ export const Cart = () => {
 	return (
 		<ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
 			<Header />
-			<div className='w-full flex mobile:flex-col gap-4 p-5 justify-between flex-wrap'></div>
+			<div className='container mx-auto py-10'>
+				<DataTable
+					columns={columns}
+					data={user.cart ?? []}
+					key={user.user_id}
+				/>
+			</div>
 			<Toaster />
 			<ModalProvider childern={<AuthModal />} />
 		</ThemeProvider>

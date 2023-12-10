@@ -58,7 +58,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 			<div className='flex flex-col gap-2'>
 				{cart.isInCart ? (
 					<Button
-						onClick={() => cart.addToCart(0)}
+						onClick={() => cart.addToCart(1)}
 						variant={!cart.isInCart ? 'outline' : 'destructive'}
 					>
 						{!cart.isInCart ? 'Добавить в корзину' : 'Удалить из корзины'}
