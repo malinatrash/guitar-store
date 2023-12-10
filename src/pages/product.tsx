@@ -11,6 +11,8 @@ import Comments from '@/components/ui/comments'
 import { Input } from '@/components/ui/input'
 import { Toaster } from '@/components/ui/toaster'
 import { useWishList } from '@/hooks/useWishList'
+import AuthModal from '@/modal/AuthModal'
+import ModalProvider from '@/modal/ModalProvider'
 import { Comment, CommentBody } from '@/models/comment'
 import {
 	useCreateCommentsMutation,
@@ -65,8 +67,8 @@ const Product = () => {
 	return (
 		<ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
 			<Header />
-			<div className='flex gap-5 justify-center items-start mobile:flex-col'>
-				<div className='default:h-screen flex flex-col p-10 justify-start mobile:p-2 h-full'>
+			<div className='flex gap-5 justify-between mobile:flex-col'>
+				<div className='default:h-screen flex flex-col p-10 justify-start mobile:p-2 h-full mobile:flex-col'>
 					<div className='ml-10'>
 						<ProductName name={product.product?.product_name ?? ''} />
 					</div>
@@ -90,7 +92,7 @@ const Product = () => {
 						</div>
 					</div>
 				</div>
-				<div className='flex flex-col gap-4 w-full mt-[13%] mr-[5%]'>
+				<div className='flex flex-col gap-4 w-full mt-[13%] mr-[5%] max-w-[320px]'>
 					<Button
 						onClick={() => {
 							// 	toast({
@@ -146,6 +148,7 @@ const Product = () => {
 				)}
 			</div>
 			<Toaster />
+			<ModalProvider childern={<AuthModal />} />
 		</ThemeProvider>
 	)
 }

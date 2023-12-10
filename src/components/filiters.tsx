@@ -1,28 +1,28 @@
-import { useVendors } from '@/hooks/useVendors';
+import { useVendors } from '@/hooks/useVendors'
 import {
 	setOnlyInStock,
 	setupPriceFrom,
 	setupPriceTo,
-} from '@/store/slices/productFilterSlice';
-import { setToDecrease, setToIncrease } from '@/store/slices/productListSort';
-import { RootState } from '@/store/store';
-import { useDispatch, useSelector } from 'react-redux';
-import VendorListItem from './ui/VendorListItem';
+} from '@/store/slices/productFilterSlice'
+import { setToDecrease, setToIncrease } from '@/store/slices/productListSort'
+import { RootState } from '@/store/store'
+import { useDispatch, useSelector } from 'react-redux'
+import VendorListItem from './ui/VendorListItem'
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-} from './ui/accordion';
-import { Checkbox } from './ui/checkbox';
-import Frame from './ui/frame';
-import { Slider } from './ui/slider';
+} from './ui/accordion'
+import { Checkbox } from './ui/checkbox'
+import Frame from './ui/frame'
+import { Slider } from './ui/slider'
 
 const Filters = () => {
-	const filter = useSelector((state: RootState) => state.productFilter);
-	const sort = useSelector((state: RootState) => state.sortProductList);
-	const dispatch = useDispatch();
-	const vendors = useVendors();
+	const filter = useSelector((state: RootState) => state.productFilter)
+	const sort = useSelector((state: RootState) => state.sortProductList)
+	const dispatch = useDispatch()
+	const vendors = useVendors()
 
 	return (
 		<Frame className='flex flex-col gap-6'>
@@ -33,8 +33,8 @@ const Filters = () => {
 						id='toIncrease'
 						checked={sort.toIncrease}
 						onClick={() => {
-							dispatch(setToIncrease(!sort.toIncrease));
-							dispatch(setToDecrease(false));
+							dispatch(setToIncrease(!sort.toIncrease))
+							dispatch(setToDecrease(false))
 						}}
 					/>
 					<label
@@ -49,8 +49,8 @@ const Filters = () => {
 						id='toDecrease'
 						checked={sort.toDecrease}
 						onClick={() => {
-							dispatch(setToDecrease(!sort.toDecrease));
-							dispatch(setToIncrease(false));
+							dispatch(setToDecrease(!sort.toDecrease))
+							dispatch(setToIncrease(false))
 						}}
 					/>
 					<label
@@ -113,18 +113,9 @@ const Filters = () => {
 						</div>
 					</AccordionContent>
 				</AccordionItem>
-				<AccordionItem value='item-2'>
-					<AccordionTrigger className='text-2xl dark:text-black'>
-						Страна производства
-					</AccordionTrigger>
-					<AccordionContent>
-						Yes. It comes with default styles that matches the other
-						components&apos; aesthetic.
-					</AccordionContent>
-				</AccordionItem>
 			</Accordion>
 		</Frame>
-	);
-};
+	)
+}
 
-export default Filters;
+export default Filters
