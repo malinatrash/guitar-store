@@ -12,6 +12,7 @@ export interface SignInResponse {
 	user?: User
 	message: string
 	status_code: number
+	session_id: string
 }
 
 export const signIn = async (data: SignInProps) => {
@@ -22,6 +23,8 @@ export const signIn = async (data: SignInProps) => {
 
 		if (response.status === 200) {
 			console.log('User data:', response.data.user)
+			console.log('session_id:', response.data.session_id)
+
 			return response
 		} else {
 			console.error('User not found:', response.data.message)

@@ -3,7 +3,12 @@ import { fetchWishList } from '@/api/fetchWishlist'
 import { SignInProps, signIn } from '@/api/signin'
 import { toast } from '@/components/ui/use-toast'
 import { hide } from '@/store/slices/authModalSlice'
-import { setupCart, setupUser, setupWishlist } from '@/store/slices/userSlice'
+import {
+	setupCart,
+	setupSession,
+	setupUser,
+	setupWishlist,
+} from '@/store/slices/userSlice'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -26,6 +31,7 @@ export const useSignIn = (data: SignInProps) => {
 			dispatch(setupWishlist(wishlist))
 			const cart = await fetchShoppingCart(response.data.user?.user_id ?? -1)
 			dispatch(setupCart(cart))
+			dispatch(setupSession(response.data.session_id))
 			setLoading(false)
 			dispatch(hide())
 		} else {

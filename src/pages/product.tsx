@@ -1,3 +1,4 @@
+import AddToCartButton from '@/components/addToCartButton'
 import Header from '@/components/header'
 import ProductCountryOfOrigin from '@/components/product/ProductCountryOfOrigin'
 import ProductDescription from '@/components/product/ProductDescription'
@@ -93,17 +94,7 @@ const Product = () => {
 					</div>
 				</div>
 				<div className='flex flex-col gap-4 w-full mt-[13%] mr-[5%] max-w-[320px]'>
-					<Button
-						onClick={() => {
-							// 	toast({
-							// 		title: 'Товар добавлен в корзину',
-							// 		description: product.product_name,
-							// 	})
-						}}
-						variant={'default'}
-					>
-						В корзину
-					</Button>
+					<AddToCartButton product={product.product!} />
 					<Button
 						onClick={wishList.addToWishlist}
 						variant={!wishList.isFavorite ? 'outline' : 'destructive'}

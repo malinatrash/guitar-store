@@ -6,6 +6,7 @@ export interface SignUpResponse {
 	user: User
 	message: 'User created successfully' | string
 	status_code: 201 | 400
+	session_id: string
 }
 
 export interface SignUpProps {

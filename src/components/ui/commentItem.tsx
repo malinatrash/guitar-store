@@ -7,9 +7,7 @@ interface IComment {
 }
 
 const CommentItem: FC<IComment> = ({ comment }) => {
-	const addLike = () => {
-		alert()
-	}
+	const addLike = () => {}
 	return (
 		<div className='flex px-8 py-4 bg-primary rounded-2xl gap-10 items-center w-fit transition-all hover:scale-[102%]'>
 			<div className='flex gap-4 flex-col'>

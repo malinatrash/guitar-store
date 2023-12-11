@@ -1,7 +1,7 @@
 import { SignUpProps, signUp } from '@/api/signup'
 import { toast } from '@/components/ui/use-toast'
 import { hide } from '@/store/slices/authModalSlice'
-import { setupUser } from '@/store/slices/userSlice'
+import { setupSession, setupUser } from '@/store/slices/userSlice'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -18,6 +18,7 @@ export const useSignUp = (data: SignUpProps) => {
 				description: 'Вы вошли в систему',
 			})
 			dispatch(setupUser(response.data.user))
+			dispatch(setupSession(response.data.session_id))
 			dispatch(hide())
 		} else {
 			toast({
