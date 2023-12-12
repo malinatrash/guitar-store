@@ -1,7 +1,8 @@
-import { User } from '@/models/user'
+import { Order, User } from '@/models/user'
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface UserState extends User {
+	orders: Order[]
 	session_id: string
 }
 
@@ -49,6 +50,7 @@ export const userSlice = createSlice({
 			state.cart = []
 			state.favorites = []
 			state.session_id = ''
+			localStorage.setItem('session_id', JSON.stringify(''))
 		},
 		setupWishlist: (state, actions) => {
 			state.favorites = actions.payload

@@ -1,18 +1,8 @@
-import { fetchShoppingCart } from '@/api/fetchShoppingCart'
-import { fetchWishList } from '@/api/fetchWishlist'
 import Header from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { useRedirect } from '@/hooks/useRedirect'
-import { useGetOrdersQuery } from '@/store/api/orders.api'
-import {
-	setupCart,
-	setupOrders,
-	setupUser,
-	setupWishlist,
-} from '@/store/slices/userSlice'
 import { RootState } from '@/store/store'
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '@/components/ui/button'
@@ -24,25 +14,13 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table'
+import ModalProvider from '@/modal/ModalProvider'
+import PayModal from '@/modal/PayModal'
+import { setOrder, show } from '@/store/slices/payModalSlice'
 
 export const Orders = () => {
 	const user = useSelector((state: RootState) => state.user)
-	const dispatch = useDispatch()
-	const { data } = useGetOrdersQuery(user.user_id ?? -1)
-
-	const setUser = async () => {
-		dispatch(setupUser(user))
-		dispatch(setupOrders(data))
-		const wishlist = await fetchWishList(user?.user_id ?? -1)
-		dispatch(setupWishlist(wishlist))
-		const cart = await fetchShoppingCart(user?.user_id ?? -1)
-		dispatch(setupCart(cart))
-		dispatch(setupOrders(data))
-	}
-
-	useEffect(() => {
-		setUser()
-	}, [])
+	const dispath = useDispatch()
 
 	useRedirect()
 	return (
@@ -50,10 +28,12 @@ export const Orders = () => {
 			<Header />
 			<div className='container mx-auto p-10 bg-transparent rounded-2xl my-12 flex gap-8 flex-col'>
 				{user.orders?.map(order => (
-					<div key={order.order_id} className='text-xl font-medium'>
-						Заказ №{order.order_id}
+					<div key={order.order_id} className='text-2xl font-medium'>
+						<span className='block box-border mb-2'>
+							Заказ №{order.order_id}
+						</span>
 						<Table className='border'>
-							<TableHeader>
+							<TableHeader className='bg-secondary'>
 								<TableRow>
 									<TableHead className='w-[100px]'>Номер заказа</TableHead>
 									<TableHead>Дата заказа</TableHead>
@@ -81,7 +61,7 @@ export const Orders = () => {
 										<Table className='border border-gray-300 mt-4'>
 											<TableBody>
 												<TableRow>
-													<TableCell colSpan={5}>
+													<TableCell className='bg-secondary' colSpan={5}>
 														Общая информация о заказе:
 													</TableCell>
 												</TableRow>
@@ -131,12 +111,22 @@ export const Orders = () => {
 							</TableBody>
 						</Table>
 						<div className='w-full flex justify-end pt-4'>
-							{order.order_status === 'открыт' && <Button>Оплатить</Button>}
+							{order.order_status === 'открыт' && (
+								<Button
+									onClick={() => {
+										dispath(setOrder(order))
+										dispath(show())
+									}}
+								>
+									Оплатить
+								</Button>
+							)}
 						</div>
 					</div>
 				))}
 			</div>
 			<Toaster />
+			<ModalProvider childern={<PayModal />} />
 		</ThemeProvider>
 	)
 }

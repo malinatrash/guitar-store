@@ -1,5 +1,3 @@
-import { fetchShoppingCart } from '@/api/fetchShoppingCart'
-import { fetchWishList } from '@/api/fetchWishlist'
 import Header from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Button } from '@/components/ui/button'
@@ -8,12 +6,7 @@ import { useRedirect } from '@/hooks/useRedirect'
 import AuthModal from '@/modal/AuthModal'
 import ModalProvider from '@/modal/ModalProvider'
 import { useCreateOrdersMutation } from '@/store/api/orders.api'
-import {
-	setupCart,
-	setupOrders,
-	setupUser,
-	setupWishlist,
-} from '@/store/slices/userSlice'
+import { setupOrders } from '@/store/slices/userSlice'
 import { RootState } from '@/store/store'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,22 +16,7 @@ export const Cart = () => {
 	const user = useSelector((state: RootState) => state.user)
 	const [createOrdersMutation, { data }] = useCreateOrdersMutation()
 	const navigate = useNavigate()
-
 	const dispatch = useDispatch()
-
-	const setUser = async () => {
-		dispatch(setupUser(user))
-		dispatch(setupOrders(data))
-		const wishlist = await fetchWishList(user?.user_id ?? -1)
-		dispatch(setupWishlist(wishlist))
-		const cart = await fetchShoppingCart(user?.user_id ?? -1)
-		dispatch(setupCart(cart))
-		dispatch(setupOrders(data))
-	}
-
-	useEffect(() => {
-		setUser()
-	}, [])
 
 	const createOrder = () => {
 		const filteredCart = user.cart?.filter(e => e.quantity !== undefined) ?? []
@@ -55,6 +33,7 @@ export const Cart = () => {
 	useEffect(() => {
 		if (data) {
 			console.log('Данные о заказе:', data)
+			dispatch(setupOrders([...user.orders, data]))
 			navigate('/orders')
 		}
 	}, [data])
