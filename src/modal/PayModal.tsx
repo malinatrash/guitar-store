@@ -1,17 +1,10 @@
+import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select'
+import { usePay } from '@/hooks/usePay'
 import { hide } from '@/store/slices/payModalSlice'
 import { RootState } from '@/store/store'
 import { useContext, useEffect, useState } from 'react'
-import Card from 'react-credit-cards-2'
 import { useDispatch, useSelector } from 'react-redux'
 import { ModalContext } from './modal-context'
 
@@ -19,6 +12,27 @@ const PayDialog = () => {
 	const isShown = useSelector((state: RootState) => state.payModal.isShown)
 	const dispatch = useDispatch()
 	const { show, setShow } = useContext(ModalContext)
+	const order = useSelector((state: RootState) => state.payModal.order)
+	const pay = usePay()
+
+	const submit = async () => {
+		const { cvc, expiry, focus, name, number } = state
+		const fields = [cvc, expiry, focus, name, number]
+
+		if (fields.some(field => field === '')) {
+			pay.toast({
+				title: 'Ошибка',
+				description: 'Заполните все поля',
+				variant: 'destructive',
+			})
+			return
+		}
+
+		const isOk = await pay.pay(order)
+		if (isOk) {
+			dispatch(hide())
+		}
+	}
 
 	const [state, setState] = useState({
 		number: '',
@@ -52,75 +66,22 @@ const PayDialog = () => {
 	return (
 		<Dialog open={show} onOpenChange={action}>
 			<DialogContent
-				className={` w-[90vw] h-[90vh] overflow-hidden mobile:max-w-[95%] justify-center  ${
+				className={`flex flex-col items-center justify-between  h-[60vh] overflow-hidden mobile:max-w-[95%]  ${
 					!isShown && 'hidden'
 				}`}
 			>
 				<DialogHeader onClick={() => setShow(false)}>
-					<span className='text-2xl font-medium'>Оплата</span>
+					<span className='text-2xl font-medium w-full'>
+						Оплата заказа №{order?.order_id}
+					</span>
 				</DialogHeader>
 
-				<div className='flex flex-col gap-4'>
-					<Select>
-						<SelectTrigger className='w-[250px]'>
-							<SelectValue placeholder='Выберите способ оплаты' />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								<SelectItem
-									className='transition-all hover:shadow-sm hover:scale-[101%]'
-									value='Наличные при получении'
-								>
-									Наличные при получении
-								</SelectItem>
-								<SelectItem
-									className='transition-all hover:shadow-sm hover:scale-[101%]'
-									value='Картой при получении'
-								>
-									Картой при получении
-								</SelectItem>
-								<SelectItem
-									className='transition-all hover:shadow-sm hover:scale-[101%]'
-									value='Онлайн'
-								>
-									Онлайн
-								</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-					<Select>
-						<SelectTrigger className='w-[250px]'>
-							<SelectValue placeholder='Выберите способ получения' />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								<SelectItem
-									className='transition-all hover:shadow-sm hover:scale-[101%]'
-									value='Доставка'
-								>
-									Доставка
-								</SelectItem>
-								<SelectItem
-									className='transition-all hover:shadow-sm hover:scale-[101%]'
-									value='Самовывоз'
-								>
-									Самовывоз
-								</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-					<Card
-						preview={true}
-						name={state.name}
-						number={state.number}
-						expiry={state.expiry}
-						cvc={state.cvc}
-					/>
+				<div className='flex flex-col gap-4 w-[70%]'>
 					<Input
 						type='tel'
 						name='number'
 						className='form-control'
-						placeholder='Card Number'
+						placeholder='1111 2222 3333 4444'
 						pattern='[\d| ]{16,22}'
 						required
 						onChange={handleInputChange}
@@ -130,7 +91,7 @@ const PayDialog = () => {
 					<Input
 						type='text'
 						name='name'
-						placeholder='Name'
+						placeholder='PAVEL NAUMOV'
 						value={state.name}
 						onChange={handleInputChange}
 						onFocus={handleInputFocus}
@@ -139,7 +100,7 @@ const PayDialog = () => {
 					<Input
 						type='text'
 						name='expiry'
-						placeholder='Expiration Date'
+						placeholder='09/29'
 						value={state.expiry}
 						onChange={handleInputChange}
 						onFocus={handleInputFocus}
@@ -153,7 +114,9 @@ const PayDialog = () => {
 						onChange={handleInputChange}
 						onFocus={handleInputFocus}
 					/>
+					<Button onClick={submit}>Оплатить {order?.total_price}₽</Button>
 				</div>
+				<div></div>
 			</DialogContent>
 		</Dialog>
 	)
