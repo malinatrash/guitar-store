@@ -2,7 +2,7 @@ import { Order, User } from '@/models/user'
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface UserState extends User {
-	orders: Order[]
+	orders?: Order[]
 	session_id: string
 }
 
@@ -20,7 +20,7 @@ const initialState: UserState = {
 	cart: undefined,
 	favorites: undefined,
 	session_id: getSessionFromLocalStorage(),
-	orders: [],
+	orders: undefined,
 }
 
 export const userSlice = createSlice({
@@ -47,8 +47,7 @@ export const userSlice = createSlice({
 			state.firstname = ''
 			state.lastname = ''
 			state.email = ''
-			state.cart = []
-			state.favorites = []
+
 			state.session_id = ''
 			localStorage.setItem('session_id', JSON.stringify(''))
 		},
@@ -61,6 +60,14 @@ export const userSlice = createSlice({
 		setupOrders: (state, actions) => {
 			state.orders = actions.payload
 		},
+		addOrder: (state, actions) => {
+			if (state.orders) {
+				state.orders?.push(actions.payload)
+			} else {
+				state.orders = []
+				state.orders?.push(actions.payload)
+			}
+		},
 	},
 })
 
@@ -71,6 +78,7 @@ export const {
 	signOut,
 	setupSession,
 	setupOrders,
+	addOrder,
 } = userSlice.actions
 
 export default userSlice.reducer

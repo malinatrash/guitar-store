@@ -10,7 +10,12 @@ import { useSessions } from '@/hooks/useSessions'
 import AuthModal from '@/modal/AuthModal'
 import ModalProvider from '@/modal/ModalProvider'
 import { useGetOrdersQuery } from '@/store/api/orders.api'
-import { setupCart, setupUser, setupWishlist } from '@/store/slices/userSlice'
+import {
+	setupCart,
+	setupOrders,
+	setupUser,
+	setupWishlist,
+} from '@/store/slices/userSlice'
 import { RootState } from '@reduxjs/toolkit/dist/query/core/apiState'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,12 +35,12 @@ export const Home = () => {
 		dispatch(setupWishlist(wishlist))
 		const cart = await fetchShoppingCart(user?.user_id ?? -1)
 		dispatch(setupCart(cart))
+		dispatch(setupOrders(data))
 	}
-
 	useEffect(() => {
 		setUser()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data])
+
 	return (
 		<ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
 			<Header />

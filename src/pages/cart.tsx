@@ -6,7 +6,7 @@ import { useRedirect } from '@/hooks/useRedirect'
 import AuthModal from '@/modal/AuthModal'
 import ModalProvider from '@/modal/ModalProvider'
 import { useCreateOrdersMutation } from '@/store/api/orders.api'
-import { setupOrders } from '@/store/slices/userSlice'
+import { addOrder } from '@/store/slices/userSlice'
 import { RootState } from '@/store/store'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -33,7 +33,7 @@ export const Cart = () => {
 	useEffect(() => {
 		if (data) {
 			console.log('Данные о заказе:', data)
-			dispatch(setupOrders([...user.orders, data]))
+			dispatch(addOrder(data))
 			navigate('/orders')
 		}
 	}, [data])
