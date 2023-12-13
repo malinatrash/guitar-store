@@ -16,7 +16,7 @@ import {
 	setupUser,
 	setupWishlist,
 } from '@/store/slices/userSlice'
-import { RootState } from '@reduxjs/toolkit/dist/query/core/apiState'
+import { RootState } from '@/store/store'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 

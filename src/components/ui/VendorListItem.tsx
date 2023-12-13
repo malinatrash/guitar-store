@@ -1,18 +1,19 @@
-import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Checkbox } from './checkbox';
-import { RootState } from '@/store/store';
-import { addVendor, deleteVendor } from '@/store/slices/productFilterSlice';
+import { Vendor } from '@/models/user'
+import { addVendor, deleteVendor } from '@/store/slices/productFilterSlice'
+import { RootState } from '@/store/store'
+import { FC } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Checkbox } from './checkbox'
 
 interface IVendorListItem {
-	vendor: Vendor;
+	vendor: Vendor
 }
 
 const VendorListItem: FC<IVendorListItem> = ({ vendor }) => {
 	const vendorIsSelected = useSelector((state: RootState) =>
 		state.productFilter.vendors.some(v => v.id === vendor.id)
-	);
-	const dispatch = useDispatch();
+	)
+	const dispatch = useDispatch()
 	return (
 		<div className='flex items-center'>
 			<Checkbox
@@ -20,9 +21,9 @@ const VendorListItem: FC<IVendorListItem> = ({ vendor }) => {
 				checked={vendorIsSelected}
 				onClick={() => {
 					if (vendorIsSelected) {
-						dispatch(deleteVendor(vendor.id));
+						dispatch(deleteVendor(vendor.id))
 					} else {
-						dispatch(addVendor(vendor));
+						dispatch(addVendor(vendor))
 					}
 				}}
 			/>
@@ -33,7 +34,7 @@ const VendorListItem: FC<IVendorListItem> = ({ vendor }) => {
 				{vendor.name}
 			</label>
 		</div>
-	);
-};
+	)
+}
 
-export default VendorListItem;
+export default VendorListItem

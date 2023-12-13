@@ -1,4 +1,4 @@
-import { sendPay } from '@/api/sendPay'
+import { PayProps, sendPay } from '@/api/sendPay'
 import { useToast } from '@/components/ui/use-toast'
 import { Order } from '@/models/user'
 
@@ -19,8 +19,8 @@ export const usePay = () => {
 	}
 
 	const pay = async (order?: Order) => {
-		const data: PayProps = { order_id: order?.order_id }
-		const payResponse = await sendPay(data)
+		const data = { order_id: order?.order_id }
+		const payResponse = await sendPay(data as PayProps)
 		const currToast = payResponse?.error ? errToast : succToast
 		toast(currToast)
 		return currToast !== errToast

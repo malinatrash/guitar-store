@@ -5,6 +5,11 @@ export interface OrderProduct {
 	quantity: number
 }
 
+export interface Vendor {
+	id: number
+	name: string
+}
+
 export interface Order {
 	order_id: number
 	order_date: string

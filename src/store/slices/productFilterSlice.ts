@@ -1,11 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { Vendor } from '@/models/user'
+import { createSlice } from '@reduxjs/toolkit'
 
 export interface ProductFilterState {
-	onlyInStock: boolean;
-	vendors: Vendor[];
-	countryOfOrigin: string[];
-	priceFrom: number;
-	priceTo: number;
+	onlyInStock: boolean
+	vendors: Vendor[]
+	countryOfOrigin: string[]
+	priceFrom: number
+	priceTo: number
 }
 
 const initialState: ProductFilterState = {
@@ -14,36 +15,36 @@ const initialState: ProductFilterState = {
 	countryOfOrigin: [],
 	priceFrom: 0,
 	priceTo: 100000,
-};
+}
 
 export const productFilter = createSlice({
 	name: 'Filter',
 	initialState,
 	reducers: {
 		setupPriceFrom: (state, actions) => {
-			state.priceFrom = actions.payload;
+			state.priceFrom = actions.payload
 		},
 		setupPriceTo: (state, actions) => {
-			state.priceTo = actions.payload;
+			state.priceTo = actions.payload
 		},
 		setOnlyInStock: (state, actions) => {
-			state.onlyInStock = actions.payload;
+			state.onlyInStock = actions.payload
 		},
 		addVendor: (state, actions) => {
-			state.vendors.push(actions.payload);
+			state.vendors.push(actions.payload)
 		},
 		deleteVendor: (state, action) => {
-			const idToDelete = action.payload;
+			const idToDelete = action.payload
 			state.vendors = [
 				...state.vendors.filter(vendor => vendor.id !== idToDelete),
-			];
+			]
 		},
 		setCountry: (state, actions) => {
-			state.countryOfOrigin = [];
-			state.countryOfOrigin = [...actions.payload];
+			state.countryOfOrigin = []
+			state.countryOfOrigin = [...actions.payload]
 		},
 	},
-});
+})
 
 export const {
 	setupPriceFrom,
@@ -52,6 +53,6 @@ export const {
 	addVendor,
 	deleteVendor,
 	setCountry,
-} = productFilter.actions;
+} = productFilter.actions
 
-export default productFilter.reducer;
+export default productFilter.reducer
