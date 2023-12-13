@@ -1,1 +1,1 @@
-export const domain = 'https://92.51.45.202:8000/api/'
+export const domain = 'http://localhost:8000/api/'
